@@ -1,0 +1,14 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+body {
+  @apply font-rubik bg-dark-blue;
+}
+
+em.highlight {
+  @apply bg-gradient-to-r from-vs-accent to-vs-cyan;
+  @apply bg-clip-text text-transparent not-italic;
+}
