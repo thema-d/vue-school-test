@@ -7,30 +7,22 @@
         class="flex flex-col w-full md:w-[602px] xl:max-w-[570px] xl:mr-20 my-8 md:my-20 2xl:max-w-[800px]"
       >
         <h1
-          class="text-white md:flex xl:block flex-col items-center text-4xl md:text-[60px] font-extrabold leading-tight text-center lg:text-left font-rubik"
-        >
-          <span class="inline-block">
-            Complete&nbsp;<span class="text-vs-accent">Vue.js</span>
-          </span>
-          <span class="inline-block">
-            <span class="text-vs-accent">training</span>&nbsp;solutions
-          </span>
-          for companies
-        </h1>
+          class="text-white xl:block text-4xl md:text-[60px] font-extrabold leading-tight text-center lg:text-left font-rubik"
+          v-html="title"
+        ></h1>
         <p
           class="mt-10 w-full text-base md:text-2xl leading-8 text-violet-50 font-rubik text-center xl:text-left"
         >
-          Training solutions designed for companies, agencies and organisations
-          with developers using or who are considering using the Vue.js
-          framework
+          {{ description }}
         </p>
 
         <div class="flex justify-center xl:block">
-          <button
-            class="px-10 py-5 text-base font-medium text-center text-gray-800 bg-emerald-500 rounded-xl w-44 mt-10 mx-auto lg:mt-16 font-rubik hover:shadow-[0px_0px_20px_-4px_#0BD88F] hover:bg-gradient-to-b from-vs-accent to-vs-blue"
+          <a
+            :href="cta_button.link.url"
+            class="inline-block px-10 py-5 text-base font-medium text-center text-gray-800 bg-emerald-500 rounded-xl mt-10 mx-auto lg:mt-16 font-rubik hover:shadow-[0px_0px_20px_-4px_#0BD88F] hover:bg-gradient-to-b from-vs-accent to-vs-blue cursor-pointer"
           >
-            Talk to Sales
-          </button>
+            {{ cta_button.label }}
+          </a>
         </div>
       </div>
       <img
@@ -124,7 +116,7 @@
           <div class="grow flex flex-col items-center justify-center">
             <em
               class="highlight text-6xl md:text-[90px] font-medium leading-[100%]"
-              >763</em
+              >{{ metrics.lessons_count }}</em
             >
             <div class="flex gap-2.5 self-center text-sm text-violet-50 mt-4">
               <icons-video-icon
@@ -136,7 +128,7 @@
           <div class="grow flex flex-col items-center justify-center">
             <em
               class="highlight text-6xl md:text-[90px] font-medium leading-[100%]"
-              >40</em
+              >{{ metrics.courses_count }}</em
             >
             <div class="flex gap-2.5 self-center text-sm text-violet-50 mt-4">
               <icons-course-icon
@@ -148,13 +140,13 @@
           <div class="grow flex flex-col items-center justify-center">
             <em
               class="highlight text-6xl md:text-[90px] font-medium leading-[100%]"
-              >64</em
+              >{{ metrics.hours_count }}</em
             >
             <div class="flex gap-2.5 self-center text-sm text-violet-50 mt-4">
               <icons-clock-icon
                 class="shrink-0 aspect-square text-white w-[18px]"
               />
-              <div>15 Hours</div>
+              <div>Hours</div>
             </div>
           </div>
         </div>
@@ -162,3 +154,68 @@
     </div>
   </section>
 </template>
+<script setup>
+// default values in case the CMS API is broken
+const defaultValue = {
+  title: "Complete Vue.js training solutions for companies",
+  description:
+    "Training solutions designed for companies, agencies and organisations with developers using or who are considering using the Vue.js framework",
+  cta_button: {
+    text: "Talk to Sales",
+    link: "#",
+  },
+};
+
+const metricsDefaultValue = {
+  lessons_count: 763,
+  courses_count: 40,
+  hours_count: 64,
+};
+
+const heroSection = useState("hero-section");
+const metricsSection = useState("metrics");
+
+const getField = (field, obj, defaultObj) =>
+  obj.value[field] || defaultObj[field];
+
+const title = computed(() => {
+  let titleValue = getField("title", heroSection, defaultValue);
+
+  // replace {{ text }} from title with <em> text </em>
+  // and match surrounding whitespace too
+  titleValue = titleValue.replace(/{{\s*(.*?)\s*}}/g, (match, p1) => {
+    return `<em>${p1}</em>`;
+  });
+
+  return titleValue;
+});
+
+const description = computed(() =>
+  getField("description", heroSection, defaultValue)
+);
+
+const cta_button = computed(() =>
+  getField("cta_button", heroSection, defaultValue)
+);
+
+const metrics = computed(() => {
+  return {
+    lessons_count: getField(
+      "lessons_count",
+      metricsSection,
+      metricsDefaultValue
+    ),
+    courses_count: getField(
+      "courses_count",
+      metricsSection,
+      metricsDefaultValue
+    ),
+    hours_count: getField("hours_count", metricsSection, metricsDefaultValue),
+  };
+});
+</script>
+<style>
+h1 > em {
+  @apply text-vs-accent not-italic;
+}
+</style>

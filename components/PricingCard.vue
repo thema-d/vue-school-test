@@ -13,7 +13,7 @@
         {{ subtitle }}
       </p>
       <template
-        v-for="({ title, enabled }, idx) in features"
+        v-for="({ label, enabled, bold }, idx) in features"
         :key="`feature-${idx}`"
       >
         <div
@@ -26,8 +26,11 @@
             <icons-check-icon
               :checked="enabled"
               class="shrink-0 self-start aspect-square text-emerald-500 w-[18px]"
+              :class="{
+                'font-bold': bold,
+              }"
             />
-            <p>{{ title }}</p>
+            <p>{{ label }}</p>
           </div>
           <icons-info-icon
             class="shrink-0 my-auto w-3.5 aspect-square text-slate-500"
@@ -110,6 +113,10 @@ import RocketLaunchIcon from "~/components/icons/RocketLaunchIcon.vue";
 import BoltIcon from "~/components/icons/BoltIcon.vue";
 
 const props = defineProps({
+  data: {
+    type: Object,
+    required: true,
+  },
   icon: {
     type: String,
     default: "leaf",
@@ -143,26 +150,28 @@ const iconComponentName = computed(() => {
   }
 });
 
-const features = [
+const defaultFeatures = [
   {
-    title: "All Video Courses",
+    label: "All Video Courses",
     enabled: true,
   },
   {
-    title: "Vue.Js Master class",
+    label: "Vue.Js Master class",
     enabled: true,
   },
   {
-    title: "Developer assist Slack channel",
+    label: "Developer assist Slack channel",
     enabled: true,
   },
   {
-    title: "Live Weekly QnA",
+    label: "Live Weekly QnA",
     enabled: false,
   },
   {
-    title: "1 x ws ticket per license",
+    label: "1 x ws ticket per license",
     enabled: false,
   },
 ];
+
+const features = computed(() => props?.data?.features || defaultFeatures);
 </script>

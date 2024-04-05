@@ -10,6 +10,12 @@ export default defineNuxtConfig({
           wght: '300..900',
         }
       }
-    }]
+    }],
+    [
+      '@storyblok/nuxt',
+      {
+        accessToken: 'ZwDTc98zGPXCFUw58w4xFAtt'
+      },
+    ],
   ],
 })

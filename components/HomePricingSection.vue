@@ -28,9 +28,19 @@
     <div
       class="grid grid-cols-1 xl:grid-cols-3 lg:px-[8rem] gap-x-8 gap-y-6 relative z-10 mt-14 md:mt-40"
     >
-      <pricing-card title="Basic" icon="leaf" />
-      <pricing-card title="Professional" icon="rocket-launch" has-mini-course />
-      <pricing-card title="Premium" icon="bolt" />
+      <pricing-card :data="pricingOne" title="Basic" icon="leaf" />
+      <pricing-card
+        :data="pricingTwo"
+        title="Professional"
+        icon="rocket-launch"
+        has-mini-course
+      />
+      <pricing-card :data="pricingThree" title="Premium" icon="bolt" />
     </div>
   </section>
 </template>
+<script setup>
+const pricings = useState("pricings");
+
+const [pricingOne, pricingTwo, pricingThree] = pricings.value;
+</script>
