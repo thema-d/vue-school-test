@@ -1,75 +1,46 @@
-# Nuxt 3 Minimal Starter
+# Vue School Content Management Guide 🚀
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Welcome to the Vue School Content Management System powered by StoryBlok! 🎉 This guide will walk you through the steps to manage the content for the Vue School Home landing page.
 
-## Setup
+## Requirements 📋
 
-Make sure to install the dependencies:
+- You must have access credentials for StoryBlok CMS. 🔑
+- Log in to StoryBlok to access the Vue School Home content. 🔒
 
-```bash
-# npm
-npm install
+## Updating Content ✏️
 
-# pnpm
-pnpm install
+### Hero Section 🦸
 
-# yarn
-yarn install
+To update the Hero section of the landing page:
 
-# bun
-bun install
-```
+1. Log in to StoryBlok.
+2. Navigate to the Vue School Home content.
+3. Locate the Hero section.
+4. Update the following properties:
+   - **Title**: Wrap text inside double curly braces to highlight in green. For example, `A {{Vue.js}} Training`.
+   - **Description**: Modify the text as needed.
+   - **Call to Action (CTA)**: Update the CTA text. 💬
 
-## Development Server
+### Metrics Section 📊
 
-Start the development server on `http://localhost:3000`:
+The Metrics section displays various counts. Ensure the following guidelines:
 
-```bash
-# npm
-npm run dev
+- **Lessons Count**: Input should be an integer number.
+- **Courses Count**: Input should be an integer number.
+- **Hours Count**: Input should be an integer number. 🕒
 
-# pnpm
-pnpm run dev
+### Pricings Section 💰
 
-# yarn
-yarn dev
+To manage pricing cards and features:
 
-# bun
-bun run dev
-```
+1. Access the Pricings section within StoryBlok.
+2. Each pricing card contains a list of features.
+3. Update the following properties for each feature:
+   - **Feature Label**: Modify the text as needed.
+   - **Enable/Disable**: Toggle the feature on/off.
+   - **Bold/Non-Bold**: Format the feature label as bold or non-bold. 💡
 
-## Production
+## Troubleshooting Tips 🛠️
 
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- If changes are not reflecting on the website, ensure you've published the changes in StoryBlok.
+- Double-check the formatting guidelines to ensure consistency across content updates.

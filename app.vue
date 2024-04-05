@@ -17,4 +17,29 @@ useHead({
     },
   ],
 });
+
+const heroSection = useState("hero-section");
+const metrics = useState("metrics");
+const pricings = useState("pricings");
+
+await callOnce(async () => {
+  const story = await useStoryblok("vue-school-home", {
+    version: "published",
+  });
+
+  const takeFirst = (arr) => arr[0];
+  heroSection.value = takeFirst(
+    story.value.content?.hero_section.map(
+      (h) =>
+        ({
+          ...h,
+          cta_button: takeFirst(h.cta_button),
+        } || [])
+    )
+  );
+
+  metrics.value = takeFirst(story.value?.content?.metrics || []);
+
+  pricings.value = story.value.content?.pricings || [];
+});
 </script>
